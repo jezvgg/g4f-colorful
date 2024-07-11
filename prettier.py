@@ -28,7 +28,7 @@ class Prettier:
                 # Обработка синтаксиса языка
                 language = text_block.split('\n')[0]
                 programm = '\n'.join(text_block.split('\n')[1:-1])
-                syntax = Syntax(programm, language, line_numbers=True, background_color='#272727')
+                syntax = Syntax(programm, language, line_numbers=False, background_color='#272727')
                 self.console.print(syntax)
                 text_output.append(syntax)
                 self.pretty_text += text_block
