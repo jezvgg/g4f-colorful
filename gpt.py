@@ -5,16 +5,13 @@ from prettier import Prettier
 client = Client()
 prettier = Prettier()
 
-response = client.chat.completions.create(
-   model="gpt-3.5-turbo",
-   messages=[{"role": "user", "content": "Объясни как работать с json в Python"}],
-   provider=Provider.ChatgptFree
-)
+chat_completion = client.chat.completions.create(
+    model="gpt-3.5-turbo",
+    messages=[{"role": "user", "content": "Привет, как работать с json на Python?"}], 
+    stream=True,
+    provider=Provider.You)
 
-prettier.get_text(response.choices[0].message.content)
-prettier.make_text()
-# print(response)
-# print(response.choices[0])
-# print(response.choices[0].message)
-# print(response.choices[0].message.content)
+for completion in chat_completion:
+    prettier.get_text(completion.choices[0].delta.content or "")
+    prettier.make_text()
 
