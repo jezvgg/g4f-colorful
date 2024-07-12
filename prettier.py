@@ -57,6 +57,11 @@ class Prettier:
 
         return text_output
 
+
+    def print(self, text):
+        self.get_text(text)
+        return self.make_text()
+
         
 
 if __name__ == '__main__':
