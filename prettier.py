@@ -5,12 +5,11 @@ from rich.console import Console
 class Prettier:
     pretty_text = ''
     other_text = ''
-    console = Console()
+    console: Console
 
 
-    def __init__(self):
-        pass
-
+    def __init__(self, console: Console):
+        self.console = console
 
     def get_text(self, text):
         # print('aded',text)
