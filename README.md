@@ -11,13 +11,14 @@ But you can use many of model, like: chatgpt, gpt4, LLAMA3 e.t.c.
 The utility saves context and gives you access to swap providers and models. The utility saves your last option, so you don't need to set the provider every time.
 
 Example of use:
+![image](https://github.com/user-attachments/assets/28ae19a5-ede1-42b2-bd9a-f9ef4a77cc48)
 
 
 ## How to install?
-You need to be installed python and rich, g4f.
+You need to be installed [python](https://www.python.org) and [rich](https://rich.readthedocs.io/en/stable/introduction.html), [g4f](https://pypi.org/project/g4f/).
 Than you need to clone repository:
 
-    git clone
+    git clone https://github.com/jezvgg/g4f-colorful.git
 And use this command:
 
     pip install --editable .
