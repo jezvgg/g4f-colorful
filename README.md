@@ -8,7 +8,7 @@ Currently, the use of text assistants like ChatGPT is extremely important and us
 And many programmers, that use linux, like to use console. But many of assistents are avaiable only at his websites. [Gpt4free](https://github.com/xtekky/gpt4free) solve this problem and gains API to many chat assiatents. My utility only creates an interface for convenient use of it.
 
 But you can use many of model, like: chatgpt, gpt4, LLAMA3 e.t.c.
-Utility save context and gain you acces to swap providers and models. Utility save your last option and you don't need to set provider every time.
+The utility saves context and gives you access to swap providers and models. The utility saves your last option, so you don't need to set the provider every time.
 
 Example of use:
 
