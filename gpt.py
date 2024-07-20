@@ -5,10 +5,14 @@ from prettier import Prettier
 from rich.console import Console
 import click
 import configparser
+import os
 
 
 config = configparser.ConfigParser(allow_no_value=True)
 config.read('./config.ini')
+if not os.path.exists('./config.ini'):
+    config.set('DEFAULT', 'provider', None)
+    config.set('DEFAULT', 'model', 'gpt-3.5-turbo')
 default_provider = config.get('DEFAULT', 'provider') if config.get('DEFAULT', 'provider') else None
 default_model = config.get('DEFAULT', 'model')
 
