@@ -8,6 +8,7 @@ import configparser
 import os
 
 
+# Configuration file with last settings of utility
 config = configparser.ConfigParser(allow_no_value=True)
 config.read('./config.ini')
 if not os.path.exists('./config.ini'):
@@ -22,6 +23,7 @@ default_model = config.get('DEFAULT', 'model')
 @click.option('--model', type=click.Choice(Model.__all__()), default=default_model)
 def ask_gpt(provider: str, model: str):
 
+    # Set last settings to configuration file
     config.set('DEFAULT', 'provider', provider)
     config.set('DEFAULT', 'model', model)
     with open('./config.ini', 'w') as file:
@@ -35,21 +37,25 @@ def ask_gpt(provider: str, model: str):
 
     while True:
 
+        # get request to model
         answer = input('\nUSER: ')
         chat_history.append({"role": "user", "content": answer})
 
+        # send request to model
         chat_completion = client.chat.completions.create(
                 model=model,
                 messages=chat_history, 
                 stream=True,
                 provider=provider)
 
-        with console.status('Запрос отправлен.'):
+        # waiting answer from model
+        with console.status('Request sent.'):
             for completion in chat_completion:
                 generical = completion.choices[0].delta.content
                 while not generical: continue
                 break
 
+        # model output with stream
         prettier.print('**ASSISTENT**: ')
         prettier.clean()
         prettier.print(generical)
