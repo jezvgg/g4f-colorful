@@ -14,10 +14,9 @@ default_model = config.get('DEFAULT', 'model')
 
 
 @click.command()
-@click.option('--answer', prompt=True, required=True)
 @click.option('--provider', type=click.Choice(Provider.__all__+[None]), default=default_provider)
 @click.option('--model', type=click.Choice(Model.__all__()), default=default_model)
-def ask_gpt(answer: str, provider: str, model: str):
+def ask_gpt(provider: str, model: str):
 
     config.set('DEFAULT', 'provider', provider)
     config.set('DEFAULT', 'model', model)
@@ -27,22 +26,34 @@ def ask_gpt(answer: str, provider: str, model: str):
     client = Client()
     console = Console()
     prettier = Prettier(console)
+    chat_history = []
+    print('^C to exit')
 
-    chat_completion = client.chat.completions.create(
-            model=model,
-            messages=[{"role": "user", "content": answer}], 
-            stream=True,
-            provider=provider)
+    while True:
 
-    with console.status('Запрос отправлен.'):
+        answer = input('\nUSER: ')
+        chat_history.append({"role": "user", "content": answer})
+
+        chat_completion = client.chat.completions.create(
+                model=model,
+                messages=chat_history, 
+                stream=True,
+                provider=provider)
+
+        with console.status('Запрос отправлен.'):
+            for completion in chat_completion:
+                generical = completion.choices[0].delta.content
+                while not generical: continue
+                break
+
+        prettier.print('**ASSISTENT**: ')
+        prettier.clean()
+        prettier.print(generical)
         for completion in chat_completion:
-            generical = completion.choices[0].delta.content
-            while not generical: continue
-            break
+            prettier.print(completion.choices[0].delta.content or "")
 
-    prettier.print(generical)
-    for completion in chat_completion:
-        prettier.print(completion.choices[0].delta.content or "")
+        chat_history.append({"role": "assistant", "content": prettier.pretty_text})
+        prettier.clean()
 
     
 if __name__ == '__main__':

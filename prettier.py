@@ -16,6 +16,11 @@ class Prettier:
         self.other_text += text
 
 
+    def clean(self):
+        self.pretty_text = ''
+        self.other_text = ''
+
+
     def make_text(self):
         
         text = self.other_text.replace(self.pretty_text, '')
