@@ -16,10 +16,19 @@ Example of use:
 
 ## How to install?
 You need to be installed [python](https://www.python.org) and [rich](https://rich.readthedocs.io/en/stable/introduction.html), [g4f](https://pypi.org/project/g4f/).
-Than you need to clone repository:
+Then just enter this commands:
 
     git clone https://github.com/jezvgg/g4f-colorful.git
-And use this command:
-
+    cd g4f-colorful
     pip install --editable .
 All Done! How you can use it!
+
+## How to use it
+Basic command
+
+    gpt
+Activate chat assistent with last settings.
+
+You can also choice assistent and provider, example:
+
+    gpt --provider=You --model=gpt4
